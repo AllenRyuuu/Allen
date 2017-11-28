@@ -1,4 +1,4 @@
-package concurrency.synchronized_demos;
+package concurrency.synchronized_demos.synchronized_this_demo;
 
 import pub_utils.PubUtils;
 

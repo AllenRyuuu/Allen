@@ -17,7 +17,7 @@ package pub_utils;
 public class PubUtils {
 
     /**
-     * sleep倒计时
+     * sleep倒计时工具
      * @param num 休眠时间
      */
     public static void countDown(int num) {
