@@ -17,9 +17,11 @@ import pub_utils.PubUtils;
  * with http://ccc.cccis.com/
  */
 public class Widget {
-    public synchronized void doSth() {
-        System.out.println(Thread.currentThread().getName() + ": calling Widget doSomething");
-        PubUtils.countDown(3); // 线程休眠3秒
-        System.out.println(Thread.currentThread().getName() + ": leave Widget doSomething");
+    public void doSth() {
+        synchronized (Widget.class) {
+            System.out.println(Thread.currentThread().getName() + ": calling Widget doSomething");
+            PubUtils.countDown(3); // 线程休眠3秒
+            System.out.println(Thread.currentThread().getName() + ": leave Widget doSomething");
+        }
     }
 }

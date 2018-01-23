@@ -23,27 +23,29 @@ public class LoggingWidget extends Widget implements Runnable{
     }
 
     @Override
-    public synchronized void doSth() {
-        System.out.println(Thread.currentThread().getName() + ": calling LoggingWidget doSomething and get Lock");
-        PubUtils.countDown(3); // 线程休眠3秒
-        super.doSth();
-        System.out.println(Thread.currentThread().getName() + ": leave LoggingWidget doSomething");
+    public void doSth() {
+        synchronized (LoggingWidget.class) { //同步synchronized(*.class)代码块的作用其实和synchronized static方法作用一样。Class锁对类的所有对象实例起作用。
+            System.out.println(Thread.currentThread().getName() + ": calling LoggingWidget doSomething and get Lock");
+            PubUtils.countDown(3); // 线程休眠3秒
+            super.doSth();
+            System.out.println(Thread.currentThread().getName() + ": leave LoggingWidget doSomething");
+        }
     }
 
     public static void main(String[] args) {
-        /*LoggingWidget lw = new LoggingWidget();
+        LoggingWidget lw = new LoggingWidget();
         Thread t1 = new Thread(lw,"乌龟"); // 创建叫乌龟的线程，传入lw
         Thread t2 = new Thread(lw,"兔子"); // 创建叫兔子的线程，传入lw
         t1.start(); // 启动线程
-        t2.start();*/
+        t2.start();
 
-        LoggingWidget lw1 = new LoggingWidget();
+        /*LoggingWidget lw1 = new LoggingWidget();
         LoggingWidget lw2 = new LoggingWidget();
 
         Thread t1 = new Thread(lw1,"乌龟");
         Thread t2 = new Thread(lw2,"兔子");
         t1.start(); // 启动线程
-        t2.start();
+        t2.start();*/
     }
 
 }
